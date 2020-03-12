@@ -1,0 +1,13 @@
+{% load staticfiles i18n %}
+
+{% if project.is_earmaster and can_edit %}
+        <div class="panel-heading-c0 padding10510 demiBold">{% trans "Import and process EarMaster results" %}</div>
+	    <div class="borderTdotted padding510">
+	        <form enctype="multipart/form-data" method="post" action="/earmaster/{{ project.id }}/import_results/" id="import_earmaster">{% csrf_token %}
+	        	{% for field in earmaster_import_results_form.hidden_fields %}{{ field }}{% endfor %}
+	            <div class="form-group">{% trans "project member"|capfirst %}{{ earmaster_import_results_form.user }}</div>
+	            <div class="form-group">EarMaster {% trans "result file" %}{{ earmaster_import_results_form.file }}</div>
+	            <div class="form-group"><input type="submit" name="import_file" id="import" value="{% trans "import"|capfirst %}" class="btn btn-default"></div>
+	        </form>
+	    </div>
+{% endif %}
